@@ -79,6 +79,83 @@ python vehicle7_base.py
 - Record simulation results for different training conditions.
 - Add automated tests for the learning mechanisms.
 
-## Purpose
+## Concept behind development
 
 This project explores how relatively simple neural-inspired mechanisms can produce adaptive behavior in an autonomous agent.
+
+    # Light                                           
+    #    │
+    #    ▼
+    # Sensor
+    # (red = 0.8)
+
+    #    │
+    #    ▼
+    # ThresholdDevice.update()
+
+    # inputs = [
+    #     (0.8, 1.0)
+    # ]
+
+    #         │
+    #         ▼
+    # total = 0.8×1.0
+
+    #         │
+    #         ▼
+    # activation
+
+    #         │
+    #         ▼
+    # output (0 or 1)
+
+    #         │
+    #         ▼
+    # Motor Threshold Device
+
+    # inputs = [
+    #     (danger_output,1.0),
+    #     (learned_association,1.0)
+    # ]
+
+    #         │
+    #         ▼
+    # Motor speed
+
+    #                 LEFT SENSOR
+    #              /               \
+    #       red_l                   blue_l
+    #         |                       |
+    #         v                       v
+    #  td_danger_l            td_neutral_l
+    #         |                       |
+    #         |<---- Mnemotrix -------|
+    #         |
+    #     assoc_l
+    #         |
+    #         --------------------
+    #                            |
+    #                            v
+    #                      td_motor_l
+    #                            |
+    #                            |
+    #                      Left wheel
+
+    #                 RIGHT SENSOR
+    #              /                \
+    #       red_r                    blue_r
+    #         |                        |
+    #         v                        v
+    #  td_danger_r             td_neutral_r
+    #         |                        |
+    #         |<---- Mnemotrix --------|
+    #         |
+    #     assoc_r
+    #         |
+    #         --------------------
+    #                            |
+    #                            v
+    #                      td_motor_r
+    #                            |
+    #                            |
+    #                     Right wheel
